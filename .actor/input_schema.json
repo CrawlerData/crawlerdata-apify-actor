@@ -35,7 +35,9 @@
       "type": "array",
       "description": "One request per query. Used by every endpoint except the two that take product IDs.",
       "editor": "stringList",
-      "prefill": ["wireless headphones"]
+      "prefill": [
+        "wireless headphones"
+      ]
     },
     "productIds": {
       "title": "Google Shopping product IDs",
@@ -61,8 +63,12 @@
       "title": "Device (Google Search only)",
       "type": "string",
       "editor": "select",
-      "enum": ["desktop", "mobile"],
-      "default": "desktop"
+      "enum": [
+        "desktop",
+        "mobile"
+      ],
+      "default": "desktop",
+      "description": "Desktop or mobile results. Only used by Google Search."
     },
     "maxConcurrency": {
       "title": "Parallel requests",
@@ -73,5 +79,7 @@
       "default": 5
     }
   },
-  "required": ["endpoint"]
+  "required": [
+    "endpoint"
+  ]
 }
