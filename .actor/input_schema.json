@@ -1,0 +1,77 @@
+{
+  "title": "Google Shopping & SERP Scraper",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "endpoint": {
+      "title": "What to scrape",
+      "type": "string",
+      "description": "Which Google data to fetch.",
+      "editor": "select",
+      "enum": [
+        "google-shopping-search",
+        "google-shopping-product",
+        "google-shopping-product-info",
+        "google-search",
+        "google-images",
+        "google-news",
+        "google-local",
+        "google-autocomplete"
+      ],
+      "enumTitles": [
+        "Google Shopping: search products",
+        "Google Shopping: sellers & prices for a product ID",
+        "Google Shopping: product details for a product ID",
+        "Google Search: web results",
+        "Google Images",
+        "Google News",
+        "Google Local (businesses)",
+        "Google Autocomplete (suggestions)"
+      ],
+      "default": "google-shopping-search"
+    },
+    "queries": {
+      "title": "Search queries",
+      "type": "array",
+      "description": "One request per query. Used by every endpoint except the two that take product IDs.",
+      "editor": "stringList",
+      "prefill": ["wireless headphones"]
+    },
+    "productIds": {
+      "title": "Google Shopping product IDs",
+      "type": "array",
+      "description": "For 'sellers & prices' and 'product details'. Get IDs from a Google Shopping search (product_id).",
+      "editor": "stringList"
+    },
+    "country": {
+      "title": "Country",
+      "type": "string",
+      "description": "Two-letter country code, e.g. us, gb, de, fr, ca, au.",
+      "editor": "textfield",
+      "default": "us"
+    },
+    "language": {
+      "title": "Language",
+      "type": "string",
+      "description": "Two-letter language code, e.g. en, de, fr.",
+      "editor": "textfield",
+      "default": "en"
+    },
+    "device": {
+      "title": "Device (Google Search only)",
+      "type": "string",
+      "editor": "select",
+      "enum": ["desktop", "mobile"],
+      "default": "desktop"
+    },
+    "maxConcurrency": {
+      "title": "Parallel requests",
+      "type": "integer",
+      "description": "How many requests run at the same time.",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 5
+    }
+  },
+  "required": ["endpoint"]
+}

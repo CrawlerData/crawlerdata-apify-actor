@@ -1,0 +1,22 @@
+{
+  "actorSpecification": 1,
+  "name": "google-shopping-serp",
+  "title": "Google Shopping & SERP Scraper (CrawlerData)",
+  "description": "Google Shopping products, every seller's price, product details, and Google Search, Images, News, Local and Autocomplete results as clean JSON. Production-grade, no proxies or browsers to manage.",
+  "version": "1.0",
+  "buildTag": "latest",
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "overview": {
+          "title": "Results",
+          "transformation": { "fields": ["input", "endpoint", "country", "status", "credits", "error", "result"] },
+          "display": { "component": "table" }
+        }
+      }
+    }
+  }
+}
