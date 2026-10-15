@@ -13,10 +13,23 @@
       "views": {
         "overview": {
           "title": "Results",
-          "transformation": { "fields": ["input", "endpoint", "country", "status", "credits", "error", "result"] },
-          "display": { "component": "table" }
+          "transformation": {
+            "fields": [
+              "input",
+              "endpoint",
+              "country",
+              "status",
+              "credits",
+              "error",
+              "result"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
         }
       }
     }
-  }
+  },
+  "output": "./output_schema.json"
 }
