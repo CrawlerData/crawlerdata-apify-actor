@@ -1,8 +1,15 @@
 {
-  "title": "Google Shopping & SERP Scraper",
+  "title": "Google Search & Shopping Scraper",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
+    "apiKey": {
+      "title": "CrawlerData API key",
+      "type": "string",
+      "description": "Your CrawlerData API key. Create one at https://app.crawlerdata.com (new accounts with a verified work email get 50 free credits). Requests use your CrawlerData credits.",
+      "editor": "textfield",
+      "isSecret": true
+    },
     "endpoint": {
       "title": "What to scrape",
       "type": "string",
@@ -28,7 +35,7 @@
         "Google Local (businesses)",
         "Google Autocomplete (suggestions)"
       ],
-      "default": "google-shopping-search"
+      "default": "google-search"
     },
     "queries": {
       "title": "Search queries",
@@ -36,7 +43,7 @@
       "description": "One request per query. Used by every endpoint except the two that take product IDs.",
       "editor": "stringList",
       "prefill": [
-        "wireless headphones"
+        "what is a serp api"
       ]
     },
     "productIds": {
@@ -80,6 +87,7 @@
     }
   },
   "required": [
+    "apiKey",
     "endpoint"
   ]
 }
