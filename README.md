@@ -1,6 +1,6 @@
-## Google Shopping & SERP Scraper
+## Google Search & Shopping Scraper
 
-Get **Google Shopping products, every seller's price, product details** and **Google Search, Images, News, Local and Autocomplete** results as clean, structured JSON, without running browsers, proxies or parsers yourself.
+Get **Google Search results (organic, AI Overview with sources, People Also Ask, local pack, top stories), Images, News, Local and Autocomplete**, plus **Google Shopping products, every seller's price and product details**, as clean, structured JSON, without running browsers, proxies or parsers yourself.
 
 This Actor runs on the [CrawlerData API](https://crawlerdata.com), a Google Shopping and SERP data API built for production price monitoring.
 
@@ -21,10 +21,11 @@ This Actor runs on the [CrawlerData API](https://crawlerdata.com), a Google Shop
 
 ### How to use it
 
-1. Pick **What to scrape**.
-2. Add **search queries**, or **product IDs** for the sellers and product-details options. Run a Google Shopping search first to get product IDs (`product_id` in each result).
-3. Set the **country** (e.g. `us`, `gb`, `de`) and **language** (e.g. `en`).
-4. Run. Results appear in the dataset; export them as JSON, CSV or Excel, or read them through the Apify API.
+1. Paste your **CrawlerData API key**. Create one at [app.crawlerdata.com](https://app.crawlerdata.com); new accounts with a verified work email get 50 free credits.
+2. Pick **What to scrape**.
+3. Add **search queries**, or **product IDs** for the sellers and product-details options. Run a Google Shopping search first to get product IDs (`product_id` in each result).
+4. Set the **country** (e.g. `us`, `gb`, `de`) and **language** (e.g. `en`).
+5. Run. Results appear in the dataset; export them as JSON, CSV or Excel, or read them through the Apify API.
 
 ### Output example (Google Shopping search)
 
@@ -46,13 +47,13 @@ This Actor runs on the [CrawlerData API](https://crawlerdata.com), a Google Shop
 
 ### Pricing
 
-Pay per event: you pay per **credit**.
+The Actor is free to run. Requests use your **CrawlerData credits** (from your own CrawlerData account), and Apify bills only its normal platform usage.
 
 - Most requests cost 1 credit.
 - Google Shopping sellers costs 1 credit per 10 sellers returned, rounded up (a product with 22 sellers is 3 credits).
 - **Failed requests are free.**
 
-Set a maximum cost per run in Apify and the Actor stops when it is reached.
+Credit packs are prepaid, with no subscription: see [crawlerdata.com/pricing](https://crawlerdata.com/pricing). The Actor stops if your key is rejected or you run out of credits.
 
 ### Tips
 

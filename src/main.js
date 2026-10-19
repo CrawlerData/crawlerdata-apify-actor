@@ -1,6 +1,7 @@
-// Runs Google Shopping / Google Search requests through the CrawlerData API and saves one dataset row
-// per query or product ID. Pay per event: one "credit" event per CrawlerData credit used (1 per request;
-// Google Shopping sellers: 1 per 10 sellers returned). Failed requests are not charged.
+// Runs Google Search / Google Shopping requests through the CrawlerData API and saves one dataset row
+// per query or product ID. The user's own CrawlerData API key is the input `apiKey`: requests use their
+// CrawlerData credits (1 per request; Google Shopping sellers: 1 per 10 sellers returned; failed requests
+// are not charged). The Actor itself is free; Apify bills the user only for platform usage.
 import { Actor, log } from 'apify';
 import { buildRequests, toRow } from './lib.js';
 
@@ -9,8 +10,10 @@ const API_URL = 'https://api.crawlerdata.com/v1/jobs';
 await Actor.init();
 
 const input = (await Actor.getInput()) ?? {};
-const apiKey = process.env.CRAWLERDATA_API_KEY;
-if (!apiKey) throw new Error('CRAWLERDATA_API_KEY is not configured for this Actor.');
+const apiKey = typeof input.apiKey === 'string' ? input.apiKey.trim() : '';
+if (!apiKey) {
+  throw new Error('Enter your CrawlerData API key. Create one at https://app.crawlerdata.com (new accounts with a verified work email get 50 free credits).');
+}
 
 const requests = buildRequests(input);
 const concurrency = Math.min(10, Math.max(1, input.maxConcurrency ?? 5));
@@ -44,12 +47,9 @@ async function worker() {
     const row = toRow(req, await call(req));
     await Actor.pushData(row);
     done++;
-    if (row.credits > 0) {
-      const charge = await Actor.charge({ eventName: 'credit', count: row.credits });
-      if (charge.eventChargeLimitReached) {
-        log.warning('Maximum cost per run reached; stopping.');
-        stopped = true;
-      }
+    if (row.error && /api key|credits|unauthor/i.test(String(row.error))) {
+      log.error(`${row.error} Check your key and balance at https://app.crawlerdata.com.`);
+      stopped = true;
     }
     if (row.status !== 'completed') log.warning(`${req.input}: ${row.error ?? 'failed'} (not charged)`);
   }
