@@ -12,7 +12,13 @@ await Actor.init();
 const input = (await Actor.getInput()) ?? {};
 const apiKey = typeof input.apiKey === 'string' ? input.apiKey.trim() : '';
 if (!apiKey) {
-  throw new Error('Enter your CrawlerData API key. Create one at https://app.crawlerdata.com (new accounts with a verified work email get 50 free credits).');
+  // Not an error: Apify's daily auto-test runs the Actor with its default input (which has no key), and a
+  // clear "setup required" row is a better first run than a crash.
+  const message = 'Add your CrawlerData API key to run this Actor. Create one at https://app.crawlerdata.com (new accounts with a verified work email get 50 free credits).';
+  log.warning(message);
+  await Actor.pushData({ status: 'setup_required', error: message, signup: 'https://app.crawlerdata.com' });
+  await Actor.exit();
+  process.exit(0);
 }
 
 const requests = buildRequests(input);

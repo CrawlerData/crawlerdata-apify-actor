@@ -6,7 +6,7 @@
     "apiKey": {
       "title": "CrawlerData API key",
       "type": "string",
-      "description": "Your CrawlerData API key. Create one at https://app.crawlerdata.com (new accounts with a verified work email get 50 free credits). Requests use your CrawlerData credits.",
+      "description": "Your CrawlerData API key (required to get results). Create one at https://app.crawlerdata.com; new accounts with a verified work email get 50 free credits. Requests use your CrawlerData credits.",
       "editor": "textfield",
       "isSecret": true
     },
@@ -87,7 +87,6 @@
     }
   },
   "required": [
-    "apiKey",
     "endpoint"
   ]
 }
